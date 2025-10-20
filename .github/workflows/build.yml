@@ -5,9 +5,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-Permissions:
+    
+permissions:
   contents: write
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
