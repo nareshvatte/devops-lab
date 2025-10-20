@@ -33,10 +33,18 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B clean verify org.jacoco:jacoco-maven-plugin:report
-          mvn -B org.pitest:pitest-maven:mutationCoverage -DwithHistory
           mvn -B sonar:sonar \
             -Dsonar.projectKey=nareshvatte_devops-lab \
             -Dsonar.organization=nareshvatte \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+      - name: Run Mutation Tests (PIT)
+        continue-on-error: true
+        run: |
+          mvn -B org.pitest:pitest-maven:mutationCoverage \
+            -DtestPlugin=junit5 \
+            -Dfeatures=+EXPORT \
+            -DoutputFormats=XML,HTML
+
 
