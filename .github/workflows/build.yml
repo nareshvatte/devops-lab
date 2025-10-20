@@ -39,12 +39,11 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
-- name: Run Mutation Tests (PIT)
-  run: mvn -B org.pitest:pitest-maven:mutationCoverage
+      - name: Run Mutation Tests (PIT)
+        run: mvn -B org.pitest:pitest-maven:mutationCoverage
 
-- name: Upload PIT HTML Report
-  uses: actions/upload-artifact@v4
-  with:
-    name: pit-reports
-    path: target/pit-reports
-
+      - name: Upload PIT HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pit-reports
+          path: target/pit-reports
